@@ -5,16 +5,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,400i,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
     <header id="head">
-
+        <h1 class="rain">Rain</h1><h1> Man</h1>
+        <p>Search for any city you can think of using the city, state, country code.</p>
     </header>
 
     <main>
-        <div id="weather-data">
-
+        <div id="weather-search">
+            <div class="card">
+                <h3 class="card-header text-uppercase">Search By City</h3>
+                <form id="city-form" class="card-body">
+                  <label class="form-label" for="city">Your Raggedy City</label>
+                  <input name="city" id="city-name" type="text" autofocus="true" class="form-input" />
+                  <button type="submit" class="btn">Get City</button>
+                </form>
+              </div>
         </div>
     </main>
 
