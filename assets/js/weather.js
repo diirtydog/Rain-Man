@@ -1,5 +1,6 @@
 // leave space for querySelectors
-
+var weatherContainerEl = document.querySelector('#weather-container');
+var weatherSearchTerm = document.querySelector('#weather-search-term');
 
 
 // api key is b3e2bf242500fea051a4efa17da1cf49
@@ -40,6 +41,22 @@ var formSubmitHandler = function (event) {
     }
     console.log(event);
 };
+// display weather cards
+var displayWeather = function(city, searchTerm) {
+    // check if we pulled weather data
+    if (city.length === 0) {
+        weatherContainerEl.textContent = "City not found.";
+        return;
+    }
+    weatherContainerEl.textContent = "";
+    weatherSearchTerm.textContent = searchTerm;
+    // loop over weather data
+    for (var i = 0; i < city.length; i++) {
+        
+    }
+    console.log(city);
+    console.log(searchTerm);
+}
 
 // add event listener for the submit button 
 cityFormEl = addEventListener('submit', formSubmitHandler);
