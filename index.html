@@ -6,17 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,400i,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
-    <header id="head">
+    <header id="head" class="header">
         <h1 class="rain">Rain</h1><h1> Man</h1>
         <p>Search for any city you can think of using the city, state, country code.</p>
     </header>
 
-    <main>
-        <div id="weather-search">
-            <div class="card">
+    <main class="col-12 d-flex flex-column justify-content-center">
+        <div id="weather-search" class="card col-12">
+            <div id="city-btn">
                 <h3 class="card-header text-uppercase">Search By City</h3>
                 <form id="city-form" class="card-body">
                   <label class="form-label" for="city">Your Raggedy City</label>
@@ -25,19 +26,20 @@
                 </form>
               </div>
         </div>
-        <div class="card">
+        <div class="card col-12 justify-content-space-around">
             <h2 class="subtitle">Showing Current Weather Data: <span id="weather-search-term"></span></h2>
-            <ul id="weather-container" class="card-group"></ul>
+            <div id="weather-container" class="card-group"></div>
         </div>
-        <div class="card">
+        <div class="card col-12">
             <h2 class="subtitle">Showing Future Weather Data:</h2>
-            <ul id="future" class="card-group"></ul>
+            <div id="future" class="card-group"></div>
         </div>
     </main>
 
     <footer id="later">
 
     </footer>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script> -->
     <script src="assets/js/weather.js"></script>
 </body>
 </html>

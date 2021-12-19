@@ -56,7 +56,7 @@ var formSubmitHandler = function (event) {
     event.preventDefault();
     // get value from input element
     var city = cityInputEl.value.trim();
-
+    saveSearch(city)
     if (city) {
         getLongLat(city);
         //cityName(cityInputEl.value);
@@ -84,20 +84,20 @@ var displayWeather = function(city, cityInputEl) {
     // var cityName = document.createElement('h2')
     // cityName.textContent = cityInputEl.value;
 
-    var currentDate = document.createElement("li");
-    currentDate.textContent = "Date: " + JSON.stringify(dt);
+    var currentDate = document.createElement("div");
+    currentDate.textContent = "Date: " + (dt);
 
-    var tempCurrent = document.createElement("li");
-    tempCurrent.textContent = "Current Temp: " + JSON.stringify(temp);
+    var tempCurrent = document.createElement("div");
+    tempCurrent.textContent = "Current Temp: " + (temp);
 
-    var humidityCurrent = document.createElement("li");
-    humidityCurrent.textContent = "Humidity: " + JSON.stringify(humidity);
+    var humidityCurrent = document.createElement("div");
+    humidityCurrent.textContent = "Humidity: " + (humidity);
 
-    var uvCurrent = document.createElement("li");
-    uvCurrent.textContent = "UV Index: " + JSON.stringify(uvi);
+    var uvCurrent = document.createElement("div");
+    uvCurrent.textContent = "UV Index: " + (uvi);
 
-    var windCurrent = document.createElement("li");
-    windCurrent.textContent = "Wind Speed: " + JSON.stringify(wind_speed);
+    var windCurrent = document.createElement("div");
+    windCurrent.textContent = "Wind Speed: " + (wind_speed);
     
     // console.log('#city-name'.value);
 
@@ -111,20 +111,63 @@ var displayWeather = function(city, cityInputEl) {
     
     //weatherContainerEl.textContent = "";
     //weatherSearchTerm.textContent = city;
-    //console.log(JSON.stringify(tempCurrent))
+    //console.log (tempCurrent))
 }
 
 var futureWeather = function (data) {
-    console.log(daily[i])
-    var future = document.getElementById('future');
-    var {dt, weather, temp, wind_speed, humidity}= daily[i];
+    
+    for (var i = 0; i < 5; i++) {
+        console.log(data.daily[i]);
+        var future = document.getElementById('future');
+        var futureDiv = document.createElement('div');
+        futureDiv.className = 'future card';
+        future.appendChild(futureDiv);
 
-    var futureDate = document.createElement("li");
-    futureDate.textContent = 'Date: ' + JSON.stringify(dt);
+        
+        
+        var {dt, weather, temp, wind_speed, humidity}= data.daily[i];
 
-    var futureConditions = document.createElement('li');
-    futureConditions.textcontent = weather[i].icon;
+        var futureDate = document.createElement("div");
+        futureDate.textContent = 'Date: ' + (dt);
+
+        // var futureConditions = document.createElement('li');
+        // futureConditions.textcontent = weather[i].icon;
+
+        var futureTemp = document.createElement('div');
+        futureTemp.textContent = 'Temperature Max: ' + (temp.max) + ' Min: ' + (temp.min);
+
+        var futureWind = document.createElement('div');
+        futureWind.textContent = 'Wind Speed: ' + (wind_speed);
+
+        var futureHumidity = document.createElement('div');
+        futureHumidity.textContent = 'Humidity: ' + (humidity);
+
+        futureDiv.appendChild(futureDate);
+        // future.appendChild(futureConditions);
+        futureDiv.appendChild(futureTemp);
+        futureDiv.appendChild(futureWind);
+        futureDiv.appendChild(futureHumidity);
+    }
+    
+};
+var saveSearch = function () {
+    userInput = cityInputEl.value.trim();
+    //console.log(cityInputEl.value.trim());
+    localStorage.setItem('city-form', JSON.stringify(userInput));
+};
+
+var loadCityBtn = function () {
+    for (var i = 0; i < 3; i++)
+        var savedCity = localStorage.getItem('city-form')
+        console.log(savedCity)
+        var getForm = document.getElementById('city-form');
+
+        var makeButton = document.createElement('button');
+        makeButton.textContent = (savedCity);
+
+        getForm.appendChild(makeButton);
 }
+loadCityBtn(); 
 // Celsius = Kelvin - 273.15
 // Fahrenheit = Kelvin x 1.8 - 459.67
 //console.log(latitude, longtitude)
