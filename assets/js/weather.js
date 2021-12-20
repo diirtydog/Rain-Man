@@ -51,11 +51,13 @@ var getWeatherRepos = function (lat, lon) {
 };
 var cityFormEl = document.querySelector('#city-form');
 var cityInputEl = document.querySelector('#city-name');
+var cityButtonEl = document.querySelector('#city-button');
 
 var formSubmitHandler = function (event) {
     event.preventDefault();
+    //console.log(makeButton.textContent);
     // get value from input element
-    var city = cityInputEl.value.trim();
+    var city = cityInputEl.value.trim(); // || cityButtonEl.textContent;
     saveSearch(city)
     if (city) {
         getLongLat(city);
@@ -76,16 +78,18 @@ var displayWeather = function(city, cityInputEl) {
         weatherContainerEl.textContent = "City not found.";
         return;
     }
-    //var myDate = new Date( your epoch date *1000);
-    //document.write(myDate.toGMTString()+"<br>"+myDate.toLocaleString());
+    
+   
     var weatherCard = document.getElementById("weather-container");
     var {dt, temp, humidity, uvi, wind_speed}= city.current;
-
+    console.log(dt)
     // var cityName = document.createElement('h2')
     // cityName.textContent = cityInputEl.value;
-
+    var myDate = new Date( dt *1000);
+        myDate.toGMTString()+"<br>"+myDate.toLocaleString();
     var currentDate = document.createElement("div");
-    currentDate.textContent = "Date: " + (dt);
+    currentDate.textContent = "Date: " + (myDate);
+    console.log(myDate)
 
     var tempCurrent = document.createElement("div");
     tempCurrent.textContent = "Current Temp: " + (temp);
@@ -126,9 +130,10 @@ var futureWeather = function (data) {
         
         
         var {dt, weather, temp, wind_speed, humidity}= data.daily[i];
-
+        var myDate = new Date( dt *1000);
+        //myDate.toGMTString()+"<br>"+myDate.toLocaleString();
         var futureDate = document.createElement("div");
-        futureDate.textContent = 'Date: ' + (dt);
+        futureDate.textContent = 'Date: ' + (myDate);
 
         // var futureConditions = document.createElement('li');
         // futureConditions.textcontent = weather[i].icon;
@@ -153,21 +158,25 @@ var futureWeather = function (data) {
 var saveSearch = function () {
     userInput = cityInputEl.value.trim();
     //console.log(cityInputEl.value.trim());
-    localStorage.setItem('city-form', JSON.stringify(userInput));
+    localStorage.setItem('city-form', userInput);
 };
 
 var loadCityBtn = function () {
     for (var i = 0; i < 3; i++)
         var savedCity = localStorage.getItem('city-form')
-        console.log(savedCity)
+        
         var getForm = document.getElementById('city-form');
 
         var makeButton = document.createElement('button');
+        makeButton.setAttribute('id', 'city-button')
         makeButton.textContent = (savedCity);
-
+        //getLatLon(makeButton.textContent);
         getForm.appendChild(makeButton);
+        
 }
-// loadCityBtn(); 
+loadCityBtn(); 
+
+// cityButtonEl = addEventListener('click', formSubmitHandler);
 // Celsius = Kelvin - 273.15
 // Fahrenheit = Kelvin x 1.8 - 459.67
 //console.log(latitude, longtitude)
