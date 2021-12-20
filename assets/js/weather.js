@@ -167,7 +167,7 @@ var loadCityBtn = function () {
 
         getForm.appendChild(makeButton);
 }
-loadCityBtn(); 
+// loadCityBtn(); 
 // Celsius = Kelvin - 273.15
 // Fahrenheit = Kelvin x 1.8 - 459.67
 //console.log(latitude, longtitude)
